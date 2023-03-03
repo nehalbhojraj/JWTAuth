@@ -28,6 +28,7 @@ public class JWTController {
 
     @PostMapping("/token")
     public ResponseEntity<?> getToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+
         System.out.println(jwtRequest);
 
         try {
@@ -38,7 +39,7 @@ public class JWTController {
             throw new Exception("Bad Request");
         }
         catch (BadCredentialsException e){
-
+            e.printStackTrace();
             throw new Exception("Bad Request");
         }
 
@@ -46,7 +47,6 @@ public class JWTController {
 
         String token = this.jwtUtil.generateToken(userDetails);
         System.out.println("Token: "+token);
-
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
